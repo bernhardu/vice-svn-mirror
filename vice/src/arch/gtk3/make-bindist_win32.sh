@@ -131,7 +131,7 @@ mkdir -p $BUILDPATH/bin
 # Copy binaries.  Strip them unless VICE is configured with "--enable-debug".
 for i in $EXECUTABLES; do
   cp $TOPBUILDDIR/src/$i.exe $BUILDPATH/bin
-  $STRIP $BUILDPATH/bin/$(basename $i).exe
+  #$STRIP $BUILDPATH/bin/$(basename $i).exe
 done
 
 # Copy DLLs
