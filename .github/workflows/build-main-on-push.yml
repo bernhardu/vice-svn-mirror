@@ -198,7 +198,8 @@ jobs:
         arch:
         - { msystem: MINGW64, arch: x86_64, prefix: mingw64 }
           #- { msystem: MINGW32, arch: i686,   prefix: mingw32 }
-        ui: [ GTK3, SDL2, SDL1 ]
+        #ui: [ GTK3, SDL2, SDL1 ]
+        ui: [ GTK3 ]
     steps:
       - run: git config --global core.autocrlf input
         shell: bash
@@ -356,30 +357,6 @@ jobs:
           ASSET_PATH: ${{ steps.build.outputs.zip_path }}
           ASSET_NAME: ${{ steps.build.outputs.zip_name }}
           ASSET_CONTENT_TYPE: application/zip
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          retries: 3
-          script: |
-            const fs = require('fs');
-            const { UPLOAD_URL, ASSET_PATH, ASSET_NAME, ASSET_CONTENT_TYPE } = process.env;
-            const uploadAssetResponse = await github.rest.repos.uploadReleaseAsset({
-              url: UPLOAD_URL,
-              headers: {
-                'content-type': ASSET_CONTENT_TYPE,
-                'content-length': fs.statSync(ASSET_PATH).size
-              },
-              name: ASSET_NAME,
-              data: fs.readFileSync(ASSET_PATH)
-            });
-
-      - name: Upload 7Zip
-        id: upload-7zip
-        uses: actions/github-script@v7
-        env:
-          UPLOAD_URL: ${{ needs.create_release.outputs.upload_url }}
-          ASSET_PATH: ${{ steps.build.outputs.seven_zip_path }}
-          ASSET_NAME: ${{ steps.build.outputs.seven_zip_name }}
-          ASSET_CONTENT_TYPE: application/x-7z-compressed
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           retries: 3
