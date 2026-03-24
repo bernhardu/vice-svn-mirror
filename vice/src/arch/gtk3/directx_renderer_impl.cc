@@ -579,7 +579,7 @@ void vice_directx_impl_async_render(void *job_data, void *pool_data)
         context->d2d_effect_scale->SetInputEffect(0, context->d2d_effect_combine);
     } else {
         /* Render the current frame ignoring alpha */
-        context->d2d_effect_strip_alpha->SetInput(0, context->render_bitmap);
+        if (context->render_bitmap) context->d2d_effect_strip_alpha->SetInput(0, context->render_bitmap);
 
         context->d2d_effect_scale->SetInputEffect(0, context->d2d_effect_strip_alpha);
     }
