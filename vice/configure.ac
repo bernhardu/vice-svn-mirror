@@ -42,9 +42,9 @@ dnl This has to happen before any other AC_* calls, so leave it here please.
 
 dnl Set VICE's compiler flags (can be overridden by the user)
 VICE_CPPFLAGS="-I\$(top_srcdir)/src/arch/systemheaderoverride"
-VICE_CFLAGS="-g -O3"
-VICE_CXXFLAGS="-g -O3"
-VICE_OBJCFLAGS="-g -O3"
+VICE_CFLAGS="-g -gdwarf-4 -O3"
+VICE_CXXFLAGS="-g -gdwarf-4 -O3"
+VICE_OBJCFLAGS="-g -gdwarf-4 -O3"
 VICE_LDFLAGS=""
 
 dnl Avoid "ar: `u' modifier ignored since `D' is the default (see `U')" warning
